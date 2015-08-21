@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.utils import timezone
 from .models import Post
 from .forms import PostForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 
 
@@ -29,6 +30,17 @@ def vote(request, question_id):
 def blog_list(request):
         # get all data to DB using view
     posts = Post.objects.all()
+    paginator = Paginator(posts, 10) # Show 10 contacts per page
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        posts = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        posts = paginator.page(paginator.num_pages)
+
     #posts =Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     context = {'posts': posts}
     return render(request, 'blog/blog_list.html', context)

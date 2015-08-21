@@ -4,14 +4,14 @@
            <table class="table table-hover">
             <thead>
            	<tr>
-           		<th>
-           		  Title
+           		<th class="col-sm-1">
+           		  Tiêu đề
            		</th>
-           		<th>
-           		  Text
+           		<th class="col-sm-6">
+           		  Nội dung
            		</th>
-           		<th>
-           		  Published
+           		<th class="col-sm-1">
+           		  Ngày xuất bản
            		</th>
            	</tr>
            	</thead>
@@ -28,11 +28,27 @@
            		 <p> 
            		 {{ post.published_date|date:"d/m/Y" }}
            		 </p>      
-           		</td>
-           		
+           		</td>           		
            	</tr>
            	{% endfor %}
            	</tbody>
            </table>
-           </div>
+           <!-- phan trang-->
+            <div class="pagination">
+				    <span class="step-links">
+				        {% if posts.has_previous %}
+				            <a href="?page={{ posts.previous_page_number }}">Trước</a>
+				        {% endif %}
+
+				        <span class="current">
+				            Trang {{ posts.number }} / {{ posts.paginator.num_pages }}.
+				        </span>
+
+				        {% if posts.has_next %}
+				            <a href="?page={{ posts.next_page_number }}">Tiếp theo</a>
+				        {% endif %}
+				    </span>
+			</div>
+            <!-- ket thuc-->
+           </div>          
 {% endblock %}
