@@ -16,9 +16,14 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from blog import views
+from django.conf.urls.static import static
+from django.conf import settings
+from rest_framework import routers
+router = routers.DefaultRouter()
+router.register(r'ws', views.PostViewSet)
 urlpatterns = [
 	url(r'^admin/', include(admin.site.urls)),
-	url(r'^blog/', views.index, name='index'),
+	#url(r'^blog/', views.index, name='index'),
 	url(r'^blog_list/', views.blog_list, name='blog_list'),
 	url(r'^$', views.blog_list, name='blog_list'),
 	#url(r'^(?P<question_id>[0-9]+)/$', views.detail, name='detail'),
@@ -27,4 +32,7 @@ urlpatterns = [
     url(r'^post/new/$', views.post_new, name='post_new'),
     url(r'^post/(?P<pk>[0-9]+)/$', views.post_detail, name='post_detail'),
     url(r'^post/(?P<pk>[0-9]+)/edit/$', views.post_edit, name='post_edit'),
-]
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+  #  static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

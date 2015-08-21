@@ -7,11 +7,14 @@
                 {{ post.published_date }}
             </div>
         {% endif %}
-        <a class="btn btn-default" href="{% url "post_edit" pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a class="btn btn-default" href="{% url "post_edit" pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a><br/>
+        <p>
+        <img src="{{ post.imgfile.url }}" alt="{{ post.imgfile.name }}" class="img-circle" width="100" height="120" title="{{ post.imgfile.name }}" />
+        </p>
         <h1>{{ post.title }}</h1>
         <p>{{ post.text|linebreaks }}</p>
         <a class="btn btn-default" href="{% url "blog_list" %}">
-        Quay lại df      
+        Quay lại 
         </a>
     </div>
 {% endblock %}
