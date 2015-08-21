@@ -17,16 +17,14 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from blog import views
 urlpatterns = [
-    
 	url(r'^admin/', include(admin.site.urls)),
 	url(r'^blog/', views.index, name='index'),
 	url(r'^blog_list/', views.blog_list, name='blog_list'),
-	 # ex: /blog/5/
-    url(r'^(?P<question_id>[0-9]+)/$', views.detail, name='detail'),
-    # ex: /blog/5/results/
-    url(r'^(?P<question_id>[0-9]+)/results/$', views.results, name='results'),
-    # ex: /blog/5/vote/
-    url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
-    #url(r'^', include('huyvh_app.urls')),
+	url(r'^$', views.blog_list, name='blog_list'),
+	#url(r'^(?P<question_id>[0-9]+)/$', views.detail, name='detail'),
+    #url(r'^(?P<question_id>[0-9]+)/results/$', views.results, name='results'),
+    #url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
+    url(r'^post/new/$', views.post_new, name='post_new'),
+    url(r'^post/(?P<pk>[0-9]+)/$', views.post_detail, name='post_detail'),
+    url(r'^post/(?P<pk>[0-9]+)/edit/$', views.post_edit, name='post_edit'),
 ]
-

@@ -1,22 +1,46 @@
 <html>
     <head>
-        <title>Django Girls blog</title>
+        <title>Demo</title>
     </head>
     <body>
+      
         <div>
-            <h1><a href="">Django Girls Blog</a></h1>
-        </div>
-
-        <div>
-            <p>published: 14.06.2014, 12:14</p>
-            <h2><a href="">My first post</a></h2>
-            <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        </div>
-
-        <div>
-            <p>published: 14.06.2014, 12:14</p>
-            <h2><a href="">My second post</a></h2>
-            <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut f.</p>
+           <label>
+           	Get Data: 
+           </label>
+           <table>
+           	<tr style="background:#f38826">
+           		<td>
+           		  title
+           		</td>
+           		<td>
+           		  text
+           		</td>
+           		<td>
+           		  published
+           		</td>
+           	</tr>
+           	  {% for post in posts %}
+           		<tr>
+           		
+    				
+        		
+           		<td>
+           		  <p><a href="{% url "post_detail" pk=post.pk %}">{{ post.title }}</a></p>
+           		</td>
+           		<td>
+           		 <p>{{ post.text}}</p>  
+           		</td>
+           		<td>
+           		 <p> 
+           		 {{ post.published_date|date:"d/m/Y" }}
+           		 </p>      
+           		</td>
+           		
+           	</tr>
+           	{% endfor %}
+           </table>
+         
         </div>
     </body>
 </html>
