@@ -33,7 +33,7 @@
            		</td>
            		<td>
            		 <p> 
-           		 {{ post.published_date|date:"d/m/Y" }}
+           		 {{ post.published_date|date:"d/m/Y H:m:s" }}
            		 </p>      
            		</td>           		
            	</tr>
@@ -58,6 +58,53 @@
 			</div>
             <!-- ket thuc-->
            </div>   
+                <!-- call ws using html5 angular js -->
+        Data ws:
+        <!--using verbatim de phan biet bien angulajs va bien cua django fw-->
+        {% verbatim %}
+        <div ng-controller='callWSCtl'>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th class="col-sm-1">
+                  Tiêu đề
+                </th>
+              <th class="col-sm-1">
+                Hình
+              </th>
+                <th class="col-sm-6">
+                  Nội dung
+                </th>
+                <th class="col-sm-1">
+                  Ngày xuất bản
+                </th>
+            </tr>
+            </thead>
+            <tbody ng-repeat='result in Arrhuyvh'>
+              
+                <tr>
+              
+                <td>
+                  <p><a href="{% url "post_detail" pk=post.pk %}">{{ result.title }}</a></p>
+                </td>
+              <td>
+                <img src="{{ result.imgfile }}" alt="{{ result.imgfile.name }}" class="img-circle" width="100" height="120" />
+              </td>
+                <td>
+                 <p>{{ result.text}}</p>  
+                </td>
+                <td>
+                 <p> 
+                 {{ result.published_date | date:'dd/MM/yyyy HH:mm:ss' }}
+                 </p>      
+                </td>                   
+            </tr>
+          
+            </tbody>
+           </table>
+           </div>     
            
+        
+        {% endverbatim %}
 {% endblock %}
 

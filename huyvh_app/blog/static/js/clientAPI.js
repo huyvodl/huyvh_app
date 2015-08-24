@@ -1,9 +1,13 @@
-function callWS($scope, $http) {
-    $http.get('http://localhost:8000/ws/?format=json').
-        success(function(data) {
-        	//alert(data);
-        	//var carsFromServer = JSON.parse(data);
-           // $scope.cars = carsFromServer.allCars;
-            $scope.results = data;
-        });
-}
+var app = angular.module("MyBlog", []);
+app.controller("callWSCtl", function($scope, $http) {
+  $http.defaults.headers.common["X-Custom-Header"] = "Angular.js";
+  $http.get('http://localhost:8000/ws').
+    success(function(data, status, headers, config) {
+      console.log("success!");
+      $scope.Arrhuyvh = data.results;
+    }).
+    error(function(data, status, headers, config) {
+      console.log("failed!");
+    });
+});
+
