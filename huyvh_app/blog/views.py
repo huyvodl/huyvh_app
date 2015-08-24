@@ -90,3 +90,7 @@ class PostViewSet(viewsets.ModelViewSet):
     """
     queryset = Post.objects.all().order_by('-published_date')
     serializer_class = PostSerializer
+
+# define moethod list call ws api
+def blog_client(request):
+    return render(request, 'blog/post_client.html',  {'' : ''})
