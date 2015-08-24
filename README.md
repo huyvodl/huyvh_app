@@ -1,10 +1,10 @@
 # python
-Project Python gồm:
+Project include:
 - Django 1.8
 - DjangoRest framework
 - Angular js
 - Database Mysql
-Bao gồm các chức năng:
+Methods:
 - Add, Edit, Detail Object Post
-- Export WS Post
-- Call WS
+- Export Webservice API list object Post
+- Call API Webservice usin angular js
