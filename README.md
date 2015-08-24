@@ -4,6 +4,7 @@ Project include:
 - DjangoRest framework
 - Angular js
 - Database Mysql
+
 Methods:
 - Add, Edit, Detail Object Post
 - Export Webservice API list object Post
