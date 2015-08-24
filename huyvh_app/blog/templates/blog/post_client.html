@@ -1,6 +1,7 @@
  {% extends "blog/base.html" %}
      
  {% block content %}
+        <span> <a href="{% url "blog_list" %}"> List Post </a></span>
         {% load static %}
         <script src="{% static "js/angular.min.js" %} " type="text/javascript"></script>
        <script src="{% static "js/clientAPI.js" %} " type="text/javascript"></script>
