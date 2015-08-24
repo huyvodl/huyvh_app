@@ -6,6 +6,6 @@ Project include:
 - Database Mysql
 
 Methods:
-- Add, Edit, Detail Object Post
+- Add, Edit, Detail, Upload file Object Post
 - Export Webservice API list object Post
 - Call API Webservice usin angular js
