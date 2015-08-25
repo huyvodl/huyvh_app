@@ -1,4 +1,4 @@
-# python
+# python by huyvo
 Project include:
 - Django 1.8
 - DjangoRest framework
@@ -8,4 +8,4 @@ Project include:
 Methods:
 - Add, Edit, Detail, Upload file Object Post
 - Export Webservice API list object Post
-- Call API Webservice usin angular js
+- Call API Webservice using angularjs
