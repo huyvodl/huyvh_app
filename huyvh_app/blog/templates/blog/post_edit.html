@@ -4,10 +4,52 @@
     <h1>New post</h1>
     <form method="POST" class="post-form" enctype="multipart/form-data">
        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Lưu</button>
-         <a class="btn btn-default" href="{% url "blog_list" %}">
-        Quay lại       
-        </a>
+        {% if form.errors %}
+    <div class="text-danger">Vui lòng nhập thông tin hợp lệ {{ form.errors|pluralize }} bên dưới.</div>
+    {% endif %}
+
+     <div class="form-group row {% if form.title.errors %}has-error{% endif %}">
+           <label for="id_title" class="col-sm-3 control-label">Tiêu đề</label>
+            <div class="col-lg-5">
+            {{ form.title }}
+            {% if form.title.errors %}
+              <span class="help-block">
+                {% for error in form.title.errors %}({{ error }}){% endfor %}
+              </span>
+            {% endif %}
+     		</div>
+     </div>
+   	 <div class="form-group row {% if form.text.errors %}has-error{% endif %}">
+           <label for="id_text" class="col-sm-3 control-label">Nội dung</label>
+      <div class="col-lg-5">
+            {{ form.text }}
+            {% if form.text.errors %}
+              <span class="help-block">
+                {% for error in form.text.errors %}({{ error }}){% endfor %}
+              </span>
+            {% endif %}
+     </div>
+     </div>
+      <div class="form-group row">
+           <label for="id_imgfile" class="col-sm-3 control-label">Hình đại diện</label>
+      <div class="col-lg-5">
+            {{ form.imgfile }}
+     </div>
+     </div>
+      <div class="form-group row">
+           <label for="id_published_date" class="col-sm-3 control-label">Ngày xuất bản</label>
+	      <div class="col-lg-5">
+	            {{ form.published_date }}
+	     </div>
+     </div>
+        {# {{ form.as_p }}  #}
+         <div class="form-group row">
+          <div class="col-sm-5 col-sm-offset-3">
+          		<button type="submit" class="save btn btn-default">Lưu</button>
+		         <a class="btn btn-default" href="{% url "blog_list" %}">
+		        Quay lại       
+		        </a>
+          </div>
+        </div>        
     </form>
 {% endblock %}
