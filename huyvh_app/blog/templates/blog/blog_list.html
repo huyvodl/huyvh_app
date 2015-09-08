@@ -1,7 +1,15 @@
 {% extends "blog/base.html" %}
 {% block content %}
+<h1>Tìm kiếm</h1>
+
+<form method="get" action="/search_post/" class="well form-search">
+    <p><label for="id_search-query">Lọc:</label>
+    <input type="text" name="search-query" id="id_search-query"  placeholder="Tiêu đề..." autofocus />
+    <input type="submit" value="Tìm kiếm">
+</form>
     <div class="table-responsive">
-           <span><a href="/client"> call API WS </a></span>
+           <span><a href="/client" class="mct_whatsapp_btns"> call API WS </a></span>
+            <span style="margin-left: 10px;"><a href="/client_search" class="mct_whatsapp_btns"> search API WS </a></span>
            <table class="table table-hover">
             <thead>
            	<tr>
@@ -17,12 +25,14 @@
            		<th class="col-sm-1">
            		  Ngày xuất bản
            		</th>
+              <th class="col-sm-1">
+                Share
+              </th>
            	</tr>
            	</thead>
            	<tbody>
            	  {% for post in posts %}
-           		<tr>
-              
+           		<tr>              
            		<td>
            		  <p><a href="{% url "post_detail" pk=post.pk %}">{{ post.title }}</a></p>
            		</td>
@@ -36,13 +46,20 @@
            		 <p> 
            		 {{ post.published_date|date:"d/m/Y H:m:s" }}
            		 </p>      
-           		</td>           		
+           		</td> 
+              <td>
+              <div class="row">
+                
+                  <a href="#" data-text="{{ post.text}}" data-link="{% url "post_detail" pk=post.pk %}" class="mct_whatsapp_btn">Share</a>
+                
+              </div>
+              </td>          		
            	</tr>
            	{% endfor %}
            	</tbody>
            </table>
            <!-- phan trang-->
-            <div class="pagination">
+            <div class="pagination well ">
 				    <span class="step-links">
 				        {% if posts.has_previous %}
 				            <a href="?page={{ posts.previous_page_number }}">Trước</a>
@@ -54,9 +71,34 @@
 				            <a href="?page={{ posts.next_page_number }}">Tiếp theo</a>
 				        {% endif %}
 				    </span>
-			</div>
+		       </div>
             <!-- ket thuc-->
-           </div>   
-                <!-- call ws using html5 angular js -->
+      </div>  
+      <!--Demo Share content using Whatapps--> 
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $(document).on("click", '.mct_whatsapp_btn', function() {
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            var text = $(this).attr("data-text");
+            var url = $(this).attr("data-link");
+            var message = encodeURIComponent(text) + " - " + encodeURIComponent(url);
+            var whatsapp_url = "whatsapp://send?text=" + message;
+            window.location.href = whatsapp_url;
+        } else {
+           var okie= confirm('Bạn có muốn share lên Whatsapp ?') 
+           if (okie) {
+              var text = $(this).attr("data-text");
+              var url = $(this).attr("data-link");
+              var message = encodeURIComponent(text) + " - " + encodeURIComponent(url);
+              var whatsapp_url = "whatsapp://send?text=" + message;
+              window.location.href = whatsapp_url;
+            } else {
+                alert ('Thanks');
+            }
+        }
+    });
+});
+</script>
 {% endblock %}
 

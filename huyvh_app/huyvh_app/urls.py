@@ -19,13 +19,17 @@ from blog import views
 from django.conf.urls.static import static
 from django.conf import settings
 from rest_framework import routers
+from rest_framework.urlpatterns import format_suffix_patterns
 router = routers.DefaultRouter()
 router.register(r'ws', views.PostViewSet)
 urlpatterns = [
 	url(r'^admin/', include(admin.site.urls)),
 	#url(r'^blog/', views.index, name='index'),
 	url(r'^blog_list/', views.blog_list, name='blog_list'),
+    url(r'^search_post/', views.search_post, name='search_post'),
     url(r'^client/', views.blog_client, name='blog_client'),
+    url(r'^client_search/', views.blog_client_search, name='blog_client_search'),
+    url(r'^searchblog/$', views.get_blog_list),
 	#url(r'^$', views.blog_list, name='blog_list'),
 	#url(r'^(?P<question_id>[0-9]+)/$', views.detail, name='detail'),
     #url(r'^(?P<question_id>[0-9]+)/results/$', views.results, name='results'),
