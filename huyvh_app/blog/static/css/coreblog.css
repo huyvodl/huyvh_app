@@ -64,3 +64,6 @@
               top:40%;
               left:45%;
             }
+          ul.pager li.active a {
+            background: #11a518 !important;
+          }

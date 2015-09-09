@@ -59,19 +59,48 @@
            	</tbody>
            </table>
            <!-- phan trang-->
-            <div class="pagination well ">
-				    <span class="step-links">
+            <ul class="pager">
+				    
 				        {% if posts.has_previous %}
-				            <a href="?page={{ posts.previous_page_number }}">Trước</a>
+                 <li class="previous">
+				            <a href="?page={{ posts.previous_page_number }}">&larr; Trước</a>
+                    </li>
+                    {% else %}
+        <li class="previous disabled prev"><a href="#">&lsaquo;&lsaquo;</a></li>
 				        {% endif %}
-				        <span class="current">
+                {% for i in posts.paginator.page_range %}
+                 <li {% if posts.number == i %} class="active" {% endif %}><a   href="?page={{i}}">{{i}}</a></li>
+
+                {% endfor %}
+				        <li>
 				            Trang {{ posts.number }} / {{ posts.paginator.num_pages }}.
-				        </span>
+				        </li>
 				        {% if posts.has_next %}
-				            <a href="?page={{ posts.next_page_number }}">Tiếp theo</a>
+                <li class="next">
+				            <a href="?page={{ posts.next_page_number }}">Tiếp theo &rarr;</a>
+                    </li>
+                    {% else %}
+          <li class="next disabled"><a href="#">&rsaquo;&rsaquo;</a></li>
 				        {% endif %}
-				    </span>
-		       </div>
+				    
+		       </ul>
+
+        <ul class="pagination pagination-centered">
+            {% if page_obj.has_previous %}
+                <li><a href="?page=1"><<</a></li>
+                <li><a href="?page={{ page_obj.previous_page_number }}"><</a></li>
+            {% endif %}
+
+            {% for i in paginator.page_range %}
+                <li {% if page_obj.number == i %} class="active" {% endif %}><a href="?page={{i}}">{{i}}</a></li>
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}">></a></li>
+                <li><a href="?page={{ page_obj.paginator.num_pages }}">>></a></li>
+            {% endif %}
+        </ul>
+    
             <!-- ket thuc-->
       </div>  
       <!--Demo Share content using Whatapps--> 
@@ -101,4 +130,3 @@ $(document).ready(function() {
 });
 </script>
 {% endblock %}
-
