@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-
+import warnings
+import exceptions
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -82,6 +83,12 @@ WSGI_APPLICATION = 'huyvh_app.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+#ignore the following error when using ipython:
+#/django/db/backends/sqlite3/base.py:50: RuntimeWarning:
+#SQLite received a naive datetime (2012-11-02 11:20:15.156506) while time zone support is active.
+
+
+warnings.filterwarnings("ignore", category=exceptions.RuntimeWarning, module='django.db.backends.sqlite3.base', lineno=53)
 
 DATABASES = {
     'default': {
