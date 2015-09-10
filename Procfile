@@ -1,1 +1,1 @@
-web: gunicorn huyvh_app.wsgi
+web: gunicorn python.wsgi
